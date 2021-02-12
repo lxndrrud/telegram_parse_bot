@@ -101,9 +101,9 @@ def music_command(message: telebot.types.Message):
     urls, artists, titles = [], [], []
     for i in range(len(funcs)):
         u, a, t = funcs[i](query)
-        urls = urls.extend(u)
-        artists = artists.extend(a)
-        titles = titles.extend(t)
+        urls = urls + u
+        artists = artists + a
+        titles = titles + t
         print(urls, artists, titles)
     if urls != []:
         markup = telebot.types.InlineKeyboardMarkup(row_width=1)
