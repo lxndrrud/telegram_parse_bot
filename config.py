@@ -1,6 +1,7 @@
 import requests
 import datetime
 import sqlite3
+import os
 from pytz import timezone
 from bs4 import BeautifulSoup
 from private_info import mlemapi_host, mlemapi_key, weather_api_key
@@ -9,8 +10,8 @@ from private_info import mlemapi_host, mlemapi_key, weather_api_key
 def send_animalpic():
     url = "https://mlemapi.p.rapidapi.com/randommlem/"
     my_headers = {
-        'x-rapidapi-host': mlemapi_host,
-        'x-rapidapi-key': mlemapi_key
+        'x-rapidapi-host': os.environ.get('mlemapi_host', mlemapi_host),
+        'x-rapidapi-key': os.environ.get('mlemapi_key', mlemapi_key)
     }
     response = requests.request('GET', url, headers=my_headers)
     response_json = response.json()
@@ -19,7 +20,8 @@ def send_animalpic():
 def send_weather(query):
     user_timezone = timezone('Europe/Moscow')
     print(f'Weather query: {query}')
-    url = f'http://api.openweathermap.org/data/2.5/weather?q={query}&appid={weather_api_key}&units=metric&lang=ru'
+    weather_key = os.environ.get('weather_token', weather_api_key)
+    url = f'http://api.openweathermap.org/data/2.5/weather?q={query}&appid={weather_key}&units=metric&lang=ru'
     try:
         response = requests.request('GET', url)
         response_json = response.json()

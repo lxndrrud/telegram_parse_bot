@@ -1,12 +1,13 @@
 import telebot
 import config
 import os
-from private_info import telegram_token
+from private_info import telegram_token as tel_token
 from flask import Flask, request
 from random import randint
 
+telegram_token = os.environ.get('telegram_token', tel_token)
 
-PROJECT_NAME = 'https://some_app_name.herokuapp.com'
+PROJECT_NAME = os.environ.get('PROJECT_NAME')
 
 bot = telebot.TeleBot(telegram_token)
 app = Flask(__name__)
@@ -146,7 +147,7 @@ def get_updates():
 
 if __name__ == '__main__' and os.environ.get('HOST_ENVIRONMENT') is not None:
     app.debug = True
-    app.secret_key = "e22934cda3e361395ac5432869f4b287e94d7178f368d36e"
+    app.secret_key = os.environ.get('flask_secret_key')
     # app.secret_key = f'{telegram_token}'
     app.run('0.0.0.0')
 elif __name__ == '__main__':
