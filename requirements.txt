@@ -1,0 +1,5 @@
+pyTelegramBotAPI
+flask
+pytz
+yandex_music
+bs4
