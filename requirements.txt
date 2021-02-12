@@ -3,3 +3,4 @@ flask
 pytz
 yandex_music
 bs4
+gunicorn
