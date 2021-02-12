@@ -1,11 +1,11 @@
 import telebot
 import config
 import os
-from private_info import telegram_token as tel_token
+#from private_info import telegram_token as tel_token
 from flask import Flask, request
 from random import randint
 
-telegram_token = os.environ.get('telegram_token', tel_token)
+telegram_token = os.environ.get('telegram_token')
 
 PROJECT_NAME = os.environ.get('PROJECT_NAME')
 
